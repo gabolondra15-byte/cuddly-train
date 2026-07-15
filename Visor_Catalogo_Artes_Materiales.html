@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Catálogo de Artes &amp; Materiales</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+
+:root{
+  --paper: #EDE7D9;
+  --paper-2: #E3DBC8;
+  --ink: #2A241C;
+  --ink-soft: #5A5142;
+  --kraft: #8A5A34;
+  --kraft-dark: #6B4527;
+  --stamp: #A4271F;
+  --line: #C7BBA3;
+  --white: #FAF7F0;
+  --ok: #3F6B3F;
+  --ok-bg: #E4EBDF;
+  --warn-bg: #F6E9E7;
+}
+
+*{box-sizing:border-box;}
+
+body{
+  margin:0;
+  background:var(--paper);
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(138,90,52,0.04) 39px, rgba(138,90,52,0.04) 40px);
+  color:var(--ink);
+  font-family:'IBM Plex Mono', monospace;
+  min-height:100vh;
+  padding:28px 16px 60px;
+}
+
+.wrap{
+  max-width:1080px;
+  margin:0 auto;
+}
+
+/* HEADER */
+.manifest-head{
+  border:2px solid var(--ink);
+  background:var(--white);
+  padding:18px 22px;
+  position:relative;
+  margin-bottom:22px;
+  box-shadow:6px 6px 0 var(--kraft);
+}
+.manifest-head::before{
+  content:'';
+  position:absolute;
+  top:8px; left:8px; right:8px; bottom:8px;
+  border:1px dashed var(--line);
+  pointer-events:none;
+}
+.eyebrow{
+  font-size:11px;
+  letter-spacing:.18em;
+  color:var(--kraft-dark);
+  font-weight:600;
+  text-transform:uppercase;
+}
+h1{
+  font-family:'Oswald', sans-serif;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.02em;
+  font-size:clamp(24px,4vw,34px);
+  margin:4px 0 6px;
+  color:var(--ink);
+}
+.sub{
+  font-size:13px;
+  color:var(--ink-soft);
+  line-height:1.5;
+}
+.corner-tag{
+  position:absolute;
+  top:-10px; right:16px;
+  background:var(--stamp);
+  color:var(--white);
+  font-family:'Oswald', sans-serif;
+  font-weight:600;
+  font-size:11px;
+  letter-spacing:.1em;
+  padding:5px 12px;
+  transform:rotate(2deg);
+  box-shadow:2px 2px 0 rgba(0,0,0,0.25);
+}
+
+/* LAYOUT: sidebar + content */
+.layout{
+  display:flex;
+  gap:18px;
+  align-items:flex-start;
+}
+
+.sidebar{
+  width:210px;
+  flex-shrink:0;
+  border:2px solid var(--ink);
+  background:var(--white);
+  position:sticky;
+  top:20px;
+}
+.sidebar-title{
+  font-family:'Oswald', sans-serif;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--kraft-dark);
+  padding:12px 14px 8px;
+  border-bottom:1px dashed var(--line);
+}
+.filter-btn{
+  display:block;
+  width:100%;
+  text-align:left;
+  border:none;
+  border-bottom:1px solid var(--line);
+  background:var(--white);
+  padding:16px 14px;
+  cursor:pointer;
+  font-family:'Oswald', sans-serif;
+  font-size:15px;
+  font-weight:600;
+  letter-spacing:.02em;
+  text-transform:uppercase;
+  color:var(--ink);
+  position:relative;
+  transition:background .12s ease;
+}
+.filter-btn .num{
+  display:block;
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10px;
+  letter-spacing:.1em;
+  color:var(--kraft-dark);
+  margin-bottom:3px;
+  font-weight:500;
+  text-transform:none;
+}
+.filter-btn:hover{ background:var(--paper-2); }
+.filter-btn.active{
+  background:var(--ink);
+  color:var(--white);
+}
+.filter-btn.active .num{ color:#D8C9A8; }
+.filter-btn.active::after{
+  content:'';
+  position:absolute;
+  right:0; top:0; bottom:0;
+  width:5px;
+  background:var(--stamp);
+}
+.filter-btn:last-child{ border-bottom:none; }
+
+.content{
+  flex:1;
+  min-width:0;
+}
+
+/* MODE TABS (dentro de Materiales) */
+.tabs{
+  display:flex;
+  gap:10px;
+  margin-bottom:18px;
+}
+.tab-btn{
+  flex:1;
+  font-family:'Oswald', sans-serif;
+  font-weight:600;
+  font-size:14px;
+  letter-spacing:.03em;
+  text-transform:uppercase;
+  padding:14px 14px;
+  border:2px solid var(--ink);
+  background:var(--paper-2);
+  color:var(--ink);
+  cursor:pointer;
+  transition:transform .12s ease, box-shadow .12s ease;
+  box-shadow:4px 4px 0 rgba(42,36,28,0.3);
+  text-align:left;
+}
+.tab-btn .num{
+  display:block;
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10px;
+  letter-spacing:.1em;
+  color:var(--kraft-dark);
+  margin-bottom:4px;
+  font-weight:500;
+}
+.tab-btn:hover{
+  transform:translate(-2px,-2px);
+  box-shadow:6px 6px 0 rgba(42,36,28,0.35);
+}
+.tab-btn.active{
+  background:var(--ink);
+  color:var(--white);
+  box-shadow:4px 4px 0 var(--stamp);
+}
+.tab-btn.active .num{ color:#D8C9A8; }
+
+/* PANEL */
+.panel{
+  border:2px solid var(--ink);
+  background:var(--white);
+  padding:20px;
+  min-height:120px;
+}
+.panel-label{
+  font-family:'Oswald', sans-serif;
+  font-size:13px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--kraft-dark);
+  border-bottom:2px solid var(--line);
+  padding-bottom:8px;
+  margin-bottom:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+/* Program buttons */
+.program-grid{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:6px;
+}
+.program-pill{
+  font-family:'Oswald', sans-serif;
+  font-size:20px;
+  font-weight:700;
+  width:64px;
+  height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:2px solid var(--ink);
+  background:var(--paper);
+  cursor:pointer;
+  transition:all .12s ease;
+}
+.program-pill:hover{
+  background:var(--kraft);
+  color:var(--white);
+}
+.program-pill.selected{
+  background:var(--stamp);
+  color:var(--white);
+  border-color:var(--stamp);
+}
+
+/* Search box for codes */
+.search-box{
+  width:100%;
+  padding:11px 12px;
+  border:2px solid var(--ink);
+  background:var(--paper);
+  font-family:'IBM Plex Mono', monospace;
+  font-size:13px;
+  color:var(--ink);
+  margin-bottom:12px;
+}
+.search-box:focus{ outline:2px solid var(--kraft); outline-offset:1px; }
+
+.code-list{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  max-height:280px;
+  overflow-y:auto;
+  padding-right:4px;
+}
+.code-row{
+  display:flex;
+  gap:10px;
+  align-items:baseline;
+  padding:9px 10px;
+  border:1px solid var(--line);
+  background:var(--paper);
+  cursor:pointer;
+  font-size:12.5px;
+}
+.code-row:hover{ border-color:var(--kraft); background:var(--paper-2); }
+.code-row.selected{ border-color:var(--stamp); background:var(--warn-bg); }
+.code-row .tag{
+  font-weight:600;
+  color:var(--kraft-dark);
+  white-space:nowrap;
+  font-size:12px;
+}
+.code-row .name{ color:var(--ink); }
+.code-row .grupo-mini{
+  margin-left:auto;
+  font-size:10px;
+  color:var(--ink-soft);
+  white-space:nowrap;
+}
+
+/* Results */
+.results{ margin-top:16px; }
+.results-title{
+  font-family:'Oswald', sans-serif;
+  font-size:13px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  color:var(--ink);
+  margin-bottom:10px;
+  padding:8px 10px;
+  background:var(--paper-2);
+  border-left:4px solid var(--stamp);
+}
+.ticket{
+  border:1px solid var(--ink);
+  border-left:6px solid var(--kraft);
+  background:var(--paper);
+  padding:10px 14px;
+  margin-bottom:8px;
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  align-items:center;
+  font-size:12.5px;
+}
+.ticket .code{
+  font-weight:700;
+  color:var(--kraft-dark);
+  white-space:nowrap;
+  letter-spacing:.02em;
+}
+.ticket .desc{ color:var(--ink); flex:1; }
+.program-badge{
+  font-family:'Oswald', sans-serif;
+  font-size:22px;
+  font-weight:700;
+  width:42px;
+  height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--ink);
+  color:var(--white);
+  flex-shrink:0;
+}
+.empty-state{
+  color:var(--ink-soft);
+  font-size:12.5px;
+  padding:14px 10px;
+  border:1px dashed var(--line);
+  text-align:center;
+}
+.count-badge{
+  font-size:11px;
+  color:var(--ink-soft);
+  font-weight:400;
+  text-transform:none;
+  letter-spacing:0;
+}
+
+/* STOCK VIEW */
+.stock-summary{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-bottom:18px;
+}
+.stock-card{
+  border:2px solid var(--ink);
+  padding:12px 12px;
+  background:var(--paper);
+  text-align:center;
+}
+.stock-card .label{
+  font-family:'Oswald', sans-serif;
+  font-size:10px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+  margin-bottom:6px;
+}
+.stock-card .value{
+  font-family:'Oswald', sans-serif;
+  font-size:22px;
+  font-weight:700;
+  color:var(--ink);
+}
+.stock-card.entradas .value{ color:var(--ok); }
+.stock-card.entradas{ background:var(--ok-bg); border-color:var(--ok); }
+.stock-card.salidas .value{ color:var(--stamp); }
+.stock-card.salidas{ background:var(--warn-bg); border-color:var(--stamp); }
+.stock-card.final{ background:var(--ink); border-color:var(--ink); }
+.stock-card.final .label{ color:#D8C9A8; }
+.stock-card.final .value{ color:var(--white); }
+
+.ledger-cols{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+@media (max-width:760px){
+  .ledger-cols{ grid-template-columns:1fr; }
+  .stock-summary{ grid-template-columns:repeat(2,1fr); }
+  .layout{ flex-direction:column; }
+  .sidebar{ width:100%; position:static; display:flex; }
+  .filter-btn{ border-bottom:none; border-right:1px solid var(--line); }
+  .filter-btn:last-child{ border-right:none; }
+}
+.ledger-block-title{
+  font-family:'Oswald', sans-serif;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--kraft-dark);
+  margin-bottom:8px;
+  padding-bottom:6px;
+  border-bottom:1px solid var(--line);
+}
+.ledger-row{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  font-size:12px;
+  padding:7px 8px;
+  border-bottom:1px dashed var(--line);
+}
+.ledger-row:last-child{ border-bottom:none; }
+.ledger-row .fecha{ color:var(--ink-soft); white-space:nowrap; }
+.ledger-row .meta{ color:var(--ink-soft); flex:1; padding:0 8px; }
+.ledger-row .cant{ font-weight:600; white-space:nowrap; }
+.ledger-row.entrada .cant{ color:var(--ok); }
+.ledger-row.salida .cant{ color:var(--stamp); }
+
+::-webkit-scrollbar{width:8px;}
+::-webkit-scrollbar-thumb{background:var(--line);}
+::-webkit-scrollbar-track{background:var(--paper);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="manifest-head">
+    <div class="corner-tag">Ver. Catálogo</div>
+    <div class="eyebrow">Plan Maestro · Materiales de Empaque</div>
+    <h1>Catálogo de Artes &amp; Materiales</h1>
+    <div class="sub">Filtra por <strong>Materiales</strong> (programa o código de planificación) o por <strong>Stock</strong> para revisar ingresos y consumos de cada código.</div>
+  </div>
+
+  <div class="layout">
+
+    <div class="sidebar">
+      <div class="sidebar-title">Filtros</div>
+      <button class="filter-btn active" id="filterMateriales" onclick="setFilter('materiales')">
+        <span class="num">Filtro 01</span>
+        Materiales
+      </button>
+      <button class="filter-btn" id="filterStock" onclick="setFilter('stock')">
+        <span class="num">Filtro 02</span>
+        Stock
+      </button>
+    </div>
+
+    <div class="content">
+
+      <!-- ===================== MATERIALES ===================== -->
+      <div id="viewMateriales">
+
+        <div class="tabs">
+          <button class="tab-btn active" id="tabPrograma" onclick="setMode('programa')">
+            <span class="num">Modo 01</span>
+            Buscar por Programa
+          </button>
+          <button class="tab-btn" id="tabCodigo" onclick="setMode('codigo')">
+            <span class="num">Modo 02</span>
+            Buscar por Código de Planificación
+          </button>
+        </div>
+
+        <div class="panel" id="panelPrograma">
+          <div class="panel-label">
+            <span>Selecciona un programa</span>
+            <span class="count-badge" id="progCount"></span>
+          </div>
+          <div class="program-grid" id="programGrid"></div>
+          <div class="results" id="programResults"></div>
+        </div>
+
+        <div class="panel" id="panelCodigo" style="display:none;">
+          <div class="panel-label">
+            <span>Selecciona un código de planificación</span>
+            <span class="count-badge" id="codeCount"></span>
+          </div>
+          <input type="text" class="search-box" id="codeSearch" placeholder="Buscar por código o nombre de material...">
+          <div class="code-list" id="codeList"></div>
+          <div class="results" id="codeResults"></div>
+        </div>
+
+      </div>
+
+      <!-- ===================== STOCK ===================== -->
+      <div id="viewStock" style="display:none;">
+        <div class="panel">
+          <div class="panel-label">
+            <span>Selecciona un código para ver su stock</span>
+            <span class="count-badge" id="stockCodeCount"></span>
+          </div>
+          <input type="text" class="search-box" id="stockSearch" placeholder="Buscar por código, nombre o grupo...">
+          <div class="code-list" id="stockCodeList"></div>
+          <div class="results" id="stockResults"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const CATALOG_DATA = {"maestra": [{"nro": 2, "grupo": "Bolsas", "codigo": "990000700001", "nombre_planeamiento": "BOLSA CAMISA MACROPERFORADA 105 X 65 CMS 0.3% HDPE TRANSP UVA", "nombre_safco": "BOLSA CAMISA MACROPERFORADA 0.3% (105 X 65MM) 12MIC GENERICA PREPICADA", "nombre_tgf": "TGF-BOLSA CAMISA MACROPERFORADA 0.3% (105 X 65MM) 12MIC GENERICA PREPICADA"}, {"nro": 10, "grupo": "Bolsas", "codigo": "990000700008", "nombre_planeamiento": "BOLSA PALLET 0.1% (242 x  285 x 60 cm)", "nombre_safco": "BOLSA MACROPERFORADA PALLET 0.1% TALSA.-P.", "nombre_tgf": "TGF-BOLSA MACROPERFORADA PALLET 0.1% TALSA.-P."}, {"nro": 18, "grupo": "Bolsas", "codigo": "990000700004", "nombre_planeamiento": "BOLSA CAMISA MACROPERFORADA 95 X 65 CMS 0.3% HDPE TRANSP UVA", "nombre_safco": "BOLSA CAMISA MACROPERFORADA 0.3 % HDPE (95X65 CM) 12 MIC GENERICA.", "nombre_tgf": "TGF-BOLSA CAMISA MACROPERFORADA 0.3 % HDPE (95X65 CM) 12 MIC GENERICA."}, {"nro": 3, "grupo": "Cajas", "codigo": "990000400022", "nombre_planeamiento": "CAJA CT PLANCHA M.EXT 398 X 595 X 100 CMS COOP NEGRA 5 KG", "nombre_safco": "CAJA CT PLANCHA M.EXT 398 X 595 X 100 CMS COOP NEGRA 5 KG", "nombre_tgf": "TGF-CAJA CT PLANCHA M.EXT 398 X 595 X 100 CMS COOP NEGRA 5 KG"}, {"nro": 11, "grupo": "Cajas", "codigo": "990000400022", "nombre_planeamiento": "CAJA CT PLANCHA M.EXT 398 X 595 X 100 CMS COOP NEGRA 5 KG", "nombre_safco": "CAJA BANDEJA CARTON (39.8 X 59.5 X 10.0 CM ) NEGRO UVA 5KG - TALSA.", "nombre_tgf": "TGF-CAJA BANDEJA CARTON (39.8 X 59.5 X 10.0 CM ) NEGRO UVA 5KG - TALSA."}, {"nro": 19, "grupo": "Cajas", "codigo": "990000400012", "nombre_planeamiento": "CAJA CT PLANCHA M.EXT 40.6 X 30.5 X 124 CMS TALSA 4.5 KG PREMIUM", "nombre_safco": "CAJA BANDEJA CARTON (40X30X12.4 CM) BLANCO TALSA 4.5 KG PREMIUM .", "nombre_tgf": "TGF-CAJA BANDEJA CARTON (40X30X12.4 CM) BLANCO TALSA 4.5 KG PREMIUM ."}, {"nro": 4, "grupo": "Clamshell", "codigo": "990001000004", "nombre_planeamiento": "CLAMSHELL RPET 2LB X 10 H126 19X11X12.5 CMS GENERICO", "nombre_safco": "CLAMSHELL 2LB X 10 PET (186X120X126 MM)", "nombre_tgf": "TGF-CLAMSHELL 2LB X 10 PET (186X120X126 MM)"}, {"nro": 12, "grupo": "Clamshell", "codigo": "990001000004", "nombre_planeamiento": "CLAMSHELL RPET 2LB X 10 H126 19X11X12.5 CMS GENERICO", "nombre_safco": "CLAMSHELL 2 LB X10 PET (186X120X126 MM) .", "nombre_tgf": "TGF-CLAMSHELL 2 LB X10 PET (186X120X126 MM) ."}, {"nro": 20, "grupo": "Clamshell", "codigo": "990001000004", "nombre_planeamiento": "CLAMSHELL RPET 2LB X 10 H126 19X11X12.5 CMS GENERICO", "nombre_safco": "CLAMSHELL 2 LB X10 PET (186X120X126 MM) .", "nombre_tgf": "TGF-CLAMSHELL 2 LB X10 PET (186X120X126 MM) ."}, {"nro": 5, "grupo": "Etiquetas", "codigo": "990001400005", "nombre_planeamiento": "ETIQUETA AUTUMN CRISP 3LB COSTCO", "nombre_safco": "ETIQUETA CLAMSHELL 3 LB PPB (90 MM X 52 MM) COSTCO AUTUMN CRISP TALSA", "nombre_tgf": "TGF-ETIQUETA CLAMSHELL 3 LB PPB (90 MM X 52 MM) COSTCO AUTUMN CRISP TALSA"}, {"nro": 13, "grupo": "Etiquetas", "codigo": "990001400001", "nombre_planeamiento": "ETIQUETA AUTUMN CRISP 3LB SAMS", "nombre_safco": "ETIQUETA CLAMSHELL 3 LB PPB (82.55 MM X 57,15 MM) SAMS AUTUMN CRISP TALSA", "nombre_tgf": "TGF-ETIQUETA CLAMSHELL 3 LB PPB (82.55 MM X 57,15 MM) SAMS AUTUMN CRISP TALSA"}, {"nro": 22, "grupo": "Etiquetas", "codigo": "990001400035", "nombre_planeamiento": "ETIQUETA AUTUMN CRISP 500 gr TALSA", "nombre_safco": "ETIQUETA CLAMSHELL 1 LB PPB (57 MM X 82.7 MM) AUTUMN CRISP TALSA.- P.", "nombre_tgf": "TGF-ETIQUETA CLAMSHELL 1 LB PPB (57 MM X 82.7 MM) AUTUMN CRISP TALSA.- P."}, {"nro": 7, "grupo": "Fajillas", "codigo": "990001400027", "nombre_planeamiento": "FAJILLA 1LB CANDY HEARTS DFI", "nombre_safco": "BANDA CLAMSHELL 1LB CARTON (70X364MM) CANDY HEARTS DFI -TALSA", "nombre_tgf": "TGF-BANDA CLAMSHELL 1LB CARTON (70X364MM) CANDY HEARTS DFI -TALSA"}, {"nro": 8, "grupo": "Fajillas", "codigo": "990001500004", "nombre_planeamiento": "FAJILLON DE CAJA 7.3 KG/AGRITAC", "nombre_safco": "FAJILLÓN 7.3 KG AGRITAC, DUPLEX C16", "nombre_tgf": "TGF-FAJILLÓN 7.3 KG AGRITAC, DUPLEX C16"}, {"nro": 14, "grupo": "Fajillas", "codigo": "990001400017", "nombre_planeamiento": "FAJILLA 1LB COTTON CANDY TALSA", "nombre_safco": "BANDA CLAMSHELL 1 LB CARTON (70X364 MM) COTTON CANDY TALSA", "nombre_tgf": "TGF-BANDA CLAMSHELL 1 LB CARTON (70X364 MM) COTTON CANDY TALSA"}, {"nro": 15, "grupo": "Fajillas", "codigo": "990001500004", "nombre_planeamiento": "FAJILLON DE CAJA 7.3 KG/AGRITAC", "nombre_safco": "FAJILLÓN CARTON \"666\" 48 X 15 MM", "nombre_tgf": "TGF-FAJILLÓN CARTON \"666\" 48 X 15 MM"}, {"nro": 16, "grupo": "Fajillas", "codigo": "990001500001", "nombre_planeamiento": "FAJILLON DE CAJA 7.3 KG/DORADO", "nombre_safco": "TAPA CAJA CARTON (25X57 CM) DORADO TALSA", "nombre_tgf": "TGF-TAPA CAJA CARTON (25X57 CM) DORADO TALSA"}, {"nro": 23, "grupo": "Fajillas", "codigo": "990001400017", "nombre_planeamiento": "FAJILLA 1LB COTTON CANDY TALSA", "nombre_safco": "BANDA CLAMSHELL 1 LB CARTON (66X364 MM) COTTON CANDY TALSA", "nombre_tgf": "TGF-BANDA CLAMSHELL 1 LB CARTON (66X364 MM) COTTON CANDY TALSA"}, {"nro": 24, "grupo": "Fajillas", "codigo": "990001500004", "nombre_planeamiento": "FAJILLON DE CAJA 7.3 KG/AGRITAC", "nombre_safco": "FAJILLÓN CARTON 7.3 KG DUPLEX C16 \"666\" 58.0 X 23.7 MM TALSA. -P.", "nombre_tgf": "TGF-FAJILLÓN CARTON 7.3 KG DUPLEX C16 \"666\" 58.0 X 23.7 MM TALSA. -P."}, {"nro": 1, "grupo": "Otros", "codigo": "990001200001", "nombre_planeamiento": "ABSORPAD MONOLAMINAR 50 GRS. 47 X 36 CMS.", "nombre_safco": "ABSORVE PAD UNILAM MIC (36X46 CM) 50 G/M2 GENERICA", "nombre_tgf": "TGF-ABSORVE PAD UNILAM MIC (36X46 CM) 50 G/M2 GENERICA"}, {"nro": 6, "grupo": "Otros", "codigo": "900000600001", "nombre_planeamiento": "CORRUPACK ONDA C 46 X 36 CMS KRAFT", "nombre_safco": "CARTON CORRUGADO (36X46 CM) GENERICA - TALSA", "nombre_tgf": "TGF-CARTON CORRUGADO (36X46 CM) GENERICA - TALSA"}, {"nro": 9, "grupo": "Otros", "codigo": "990001200001", "nombre_planeamiento": "ABSORPAD MONOLAMINAR 50 GRS. 47 X 36 CMS.", "nombre_safco": "ABSORVE PAD UNILAMINAR MICROPERFORADO PAPEL (36X46) 50G/M2 GENERICA", "nombre_tgf": "TGF-ABSORVE PAD UNILAMINAR MICROPERFORADO PAPEL (36X46) 50G/M2 GENERICA"}, {"nro": 17, "grupo": "Otros", "codigo": "990001200001", "nombre_planeamiento": "ABSORPAD MONOLAMINAR 50 GRS. 47 X 36 CMS.", "nombre_safco": "ABSORVE PAD UNILAMINAR MICROPERFORADO PAPEL (36X46 CM) 50 G/M2 GENERICA TALSA.", "nombre_tgf": "TGF-ABSORVE PAD UNILAMINAR MICROPERFORADO PAPEL (36X46 CM) 50 G/M2 GENERICA TALSA."}, {"nro": 21, "grupo": "Otros", "codigo": "900000600001", "nombre_planeamiento": "CORRUPACK ONDA C 46 X 36 CMS KRAFT", "nombre_safco": "CARTON CORRUGADO (36X46 CM) GENERICA - TALSA", "nombre_tgf": "TGF-CARTON CORRUGADO (36X46 CM) GENERICA - TALSA"}], "programas": [{"nro": 1, "programa": "A", "codigo": "990001200001", "material": "ABSORVE PAD UNILAM MIC (36X46 CM) 50 G/M2 GENERICA"}, {"nro": 2, "programa": "A", "codigo": "990000700001", "material": "BOLSA CAMISA MACROPERFORADA 0.3% (105 X 65MM) 12MIC GENERICA PREPICADA"}, {"nro": 3, "programa": "A", "codigo": "990000400022", "material": "CAJA CT PLANCHA M.EXT 398 X 595 X 100 CMS COOP NEGRA 5 KG"}, {"nro": 4, "programa": "A", "codigo": "990001000004", "material": "CLAMSHELL 2LB X 10 PET (186X120X126 MM)"}, {"nro": 5, "programa": "A", "codigo": "990001400005", "material": "ETIQUETA CLAMSHELL 3 LB PPB (90 MM X 52 MM) COSTCO AUTUMN CRISP TALSA"}, {"nro": 6, "programa": "A", "codigo": "900000600001", "material": "CARTON CORRUGADO (36X46 CM) GENERICA - TALSA"}, {"nro": 7, "programa": "A", "codigo": "990001400027", "material": "BANDA CLAMSHELL 1LB CARTON (70X364MM) CANDY HEARTS DFI -TALSA"}, {"nro": 8, "programa": "A", "codigo": "990001500004", "material": "FAJILLÓN 7.3 KG AGRITAC, DUPLEX C16"}, {"nro": 9, "programa": "B", "codigo": "990001200001", "material": "ABSORVE PAD UNILAMINAR MICROPERFORADO PAPEL (36X46) 50G/M2 GENERICA"}, {"nro": 10, "programa": "B", "codigo": "990000700008", "material": "BOLSA MACROPERFORADA PALLET 0.1% TALSA.-P."}, {"nro": 11, "programa": "B", "codigo": "990000400022", "material": "CAJA BANDEJA CARTON (39.8 X 59.5 X 10.0 CM ) NEGRO UVA 5KG - TALSA."}, {"nro": 12, "programa": "B", "codigo": "990001000004", "material": "CLAMSHELL 2 LB X10 PET (186X120X126 MM) ."}, {"nro": 13, "programa": "B", "codigo": "990001400001", "material": "ETIQUETA CLAMSHELL 3 LB PPB (82.55 MM X 57,15 MM) SAMS AUTUMN CRISP TALSA"}, {"nro": 14, "programa": "B", "codigo": "990001400017", "material": "BANDA CLAMSHELL 1 LB CARTON (70X364 MM) COTTON CANDY TALSA"}, {"nro": 15, "programa": "B", "codigo": "990001500004", "material": "FAJILLÓN CARTON \"666\" 48 X 15 MM"}, {"nro": 16, "programa": "B", "codigo": "990001500001", "material": "TAPA CAJA CARTON (25X57 CM) DORADO TALSA"}, {"nro": 17, "programa": "C", "codigo": "990001200001", "material": "ABSORVE PAD UNILAMINAR MICROPERFORADO PAPEL (36X46 CM) 50 G/M2 GENERICA TALSA."}, {"nro": 18, "programa": "C", "codigo": "990000700004", "material": "BOLSA CAMISA MACROPERFORADA 0.3 % HDPE (95X65 CM) 12 MIC GENERICA."}, {"nro": 19, "programa": "C", "codigo": "990000400012", "material": "CAJA BANDEJA CARTON (40X30X12.4 CM) BLANCO TALSA 4.5 KG PREMIUM ."}, {"nro": 20, "programa": "C", "codigo": "990001000004", "material": "CLAMSHELL 2 LB X10 PET (186X120X126 MM) ."}, {"nro": 21, "programa": "C", "codigo": "900000600001", "material": "CARTON CORRUGADO (36X46 CM) GENERICA - TALSA"}, {"nro": 22, "programa": "C", "codigo": "990001400035", "material": "ETIQUETA CLAMSHELL 1 LB PPB (57 MM X 82.7 MM) AUTUMN CRISP TALSA.- P."}, {"nro": 23, "programa": "C", "codigo": "990001400017", "material": "BANDA CLAMSHELL 1 LB CARTON (66X364 MM) COTTON CANDY TALSA"}, {"nro": 24, "programa": "C", "codigo": "990001500004", "material": "FAJILLÓN CARTON 7.3 KG DUPLEX C16 \"666\" 58.0 X 23.7 MM TALSA. -P."}], "stock": [{"codigo": "900000600001", "grupo": "Otros", "descripcion": "CORRUPACK ONDA C 46 X 36 CMS KRAFT", "stock_inicial": 2000, "stock_final": 1050, "total_ingresos": 1800, "total_consumos": -2750, "ingresos": [{"fecha": "2026-06-23", "proveedor": "SAFCO", "factura": "FAC F915-1021", "cantidad": 1200}, {"fecha": "2026-06-27", "proveedor": "ECOPACKING", "factura": "FAC F001-1526", "cantidad": 600}], "consumos": [{"fecha": "2026-06-01", "cantidad": -500}, {"fecha": "2026-06-10", "cantidad": -250}, {"fecha": "2026-06-15", "cantidad": -500}, {"fecha": "2026-06-20", "cantidad": -500}, {"fecha": "2026-06-25", "cantidad": -500}, {"fecha": "2026-06-30", "cantidad": -500}]}, {"codigo": "990000400012", "grupo": "Cajas", "descripcion": "CAJA CT PLANCHA M.EXT 40.6 X 30.5 X 124 CMS TALSA 4.5 KG PREMIUM", "stock_inicial": 2000, "stock_final": 1300, "total_ingresos": 2300, "total_consumos": -3000, "ingresos": [{"fecha": "2026-06-23", "proveedor": "SAFCO", "factura": "FAC F915-1021", "cantidad": 800}, {"fecha": "2026-06-24", "proveedor": "SAFCO", "factura": "FAC F915-1022", "cantidad": 500}, {"fecha": "2026-06-27", "proveedor": "ECOPACKING", "factura": "FAC F001-1526", "cantidad": 600}, {"fecha": "2026-06-28", "proveedor": "ECOPACKING", "factura": "FAC F001-1527", "cantidad": 400}], "consumos": [{"fecha": "2026-06-01", "cantidad": -250}, {"fecha": "2026-06-04", "cantidad": -250}, {"fecha": "2026-06-07", "cantidad": -500}, {"fecha": "2026-06-11", "cantidad": -500}, {"fecha": "2026-06-17", "cantidad": -250}, {"fecha": "2026-06-18", "cantidad": -250}, {"fecha": "2026-06-22", "cantidad": -500}, {"fecha": "2026-06-27", "cantidad": -500}]}, {"codigo": "990000400022", "grupo": "Cajas", "descripcion": "CAJA CT PLANCHA M.EXT 398 X 595 X 100 CMS COOP NEGRA 5 KG", "stock_inicial": 3000, "stock_final": 2450, "total_ingresos": 2200, "total_consumos": -2750, "ingresos": [{"fecha": "2026-06-24", "proveedor": "SAFCO", "factura": "FAC F915-1022", "cantidad": 1200}, {"fecha": "2026-06-27", "proveedor": "ECOPACKING", "factura": "FAC F001-1526", "cantidad": 1000}], "consumos": [{"fecha": "2026-06-01", "cantidad": -500}, {"fecha": "2026-06-10", "cantidad": -250}, {"fecha": "2026-06-15", "cantidad": -500}, {"fecha": "2026-06-20", "cantidad": -500}, {"fecha": "2026-06-25", "cantidad": -500}, {"fecha": "2026-06-30", "cantidad": -500}]}, {"codigo": "990000700001", "grupo": "Bolsas", "descripcion": "BOLSA CAMISA MACROPERFORADA 105 X 65 CMS 0.3% HDPE TRANSP UVA", "stock_inicial": 2000, "stock_final": 1250, "total_ingresos": 2000, "total_consumos": -2750, "ingresos": [{"fecha": "2026-06-23", "proveedor": "SAFCO", "factura": "FAC F915-1021", "cantidad": 1000}, {"fecha": "2026-06-27", "proveedor": "ECOPACKING", "factura": "FAC F001-1526", "cantidad": 1000}], "consumos": [{"fecha": "2026-06-01", "cantidad": -500}, {"fecha": "2026-06-10", "cantidad": -250}, {"fecha": "2026-06-15", "cantidad": -500}, {"fecha": "2026-06-20", "cantidad": -500}, {"fecha": "2026-06-25", "cantidad": -500}, {"fecha": "2026-06-30", "cantidad": -500}]}, {"codigo": "990000700004", "grupo": "Bolsas", "descripcion": "BOLSA CAMISA MACROPERFORADA 95 X 65 CMS 0.3% HDPE TRANSP UVA", "stock_inicial": 3000, "stock_final": 2200, "total_ingresos": 2700, "total_consumos": -3500, "ingresos": [{"fecha": "2026-06-24", "proveedor": "SAFCO", "factura": "FAC F915-1022", "cantidad": 1500}, {"fecha": "2026-06-28", "proveedor": "ECOPACKING", "factura": "FAC F001-1527", "cantidad": 1200}], "consumos": [{"fecha": "2026-06-04", "cantidad": -250}, {"fecha": "2026-06-05", "cantidad": -250}, {"fecha": "2026-06-08", "cantidad": -500}, {"fecha": "2026-06-12", "cantidad": -500}, {"fecha": "2026-06-18", "cantidad": -500}, {"fecha": "2026-06-22", "cantidad": -500}, {"fecha": "2026-06-27", "cantidad": -500}, {"fecha": "2026-06-28", "cantidad": -500}]}, {"codigo": "990000700008", "grupo": "Bolsas", "descripcion": "BOLSA PALLET 0.1% (242 x  285 x 60 cm)", "stock_inicial": 4000, "stock_final": 2700, "total_ingresos": 2200, "total_consumos": -3500, "ingresos": [{"fecha": "2026-06-24", "proveedor": "SAFCO", "factura": "FAC F915-1022", "cantidad": 1200}, {"fecha": "2026-06-28", "proveedor": "ECOPACKING", "factura": "FAC F001-1527", "cantidad": 1000}], "consumos": [{"fecha": "2026-06-02", "cantidad": -250}, {"fecha": "2026-06-03", "cantidad": -250}, {"fecha": "2026-06-09", "cantidad": -500}, {"fecha": "2026-06-12", "cantidad": -500}, {"fecha": "2026-06-18", "cantidad": -500}, {"fecha": "2026-06-22", "cantidad": -500}, {"fecha": "2026-06-27", "cantidad": -500}, {"fecha": "2026-06-28", "cantidad": -500}]}, {"codigo": "990001000004", "grupo": "Clamshell", "descripcion": "CLAMSHELL RPET 2LB X 10 H126 19X11X12.5 CMS GENERICO", "stock_inicial": 3000, "stock_final": 2000, "total_ingresos": 2500, "total_consumos": -3500, "ingresos": [{"fecha": "2026-06-24", "proveedor": "SAFCO", "factura": "FAC F915-1022", "cantidad": 1500}, {"fecha": "2026-06-28", "proveedor": "ECOPACKING", "factura": "FAC F001-1527", "cantidad": 1000}], "consumos": [{"fecha": "2026-06-02", "cantidad": -250}, {"fecha": "2026-06-03", "cantidad": -250}, {"fecha": "2026-06-09", "cantidad": -500}, {"fecha": "2026-06-12", "cantidad": -500}, {"fecha": "2026-06-18", "cantidad": -500}, {"fecha": "2026-06-22", "cantidad": -500}, {"fecha": "2026-06-27", "cantidad": -500}, {"fecha": "2026-06-28", "cantidad": -500}]}, {"codigo": "990001200001", "grupo": "Otros", "descripcion": "ABSORPAD MONOLAMINAR 50 GRS. 47 X 36 CMS.", "stock_inicial": 4000, "stock_final": 3200, "total_ingresos": 2200, "total_consumos": -3000, "ingresos": [{"fecha": "2026-06-23", "proveedor": "SAFCO", "factura": "FAC F915-1021", "cantidad": 1200}, {"fecha": "2026-06-27", "proveedor": "ECOPACKING", "factura": "FAC F001-1526", "cantidad": 1000}], "consumos": [{"fecha": "2026-06-01", "cantidad": -250}, {"fecha": "2026-06-04", "cantidad": -250}, {"fecha": "2026-06-07", "cantidad": -500}, {"fecha": "2026-06-11", "cantidad": -500}, {"fecha": "2026-06-17", "cantidad": -250}, {"fecha": "2026-06-18", "cantidad": -250}, {"fecha": "2026-06-22", "cantidad": -500}, {"fecha": "2026-06-27", "cantidad": -500}]}, {"codigo": "990001400001", "grupo": "Etiquetas", "descripcion": "ETIQUETA AUTUMN CRISP 3LB SAMS", "stock_inicial": 4000, "stock_final": 2400, "total_ingresos": 1900, "total_consumos": -3500, "ingresos": [{"fecha": "2026-06-24", "proveedor": "SAFCO", "factura": "FAC F915-1022", "cantidad": 1500}, {"fecha": "2026-06-28", "proveedor": "ECOPACKING", "factura": "FAC F001-1527", "cantidad": 400}], "consumos": [{"fecha": "2026-06-02", "cantidad": -250}, {"fecha": "2026-06-03", "cantidad": -250}, {"fecha": "2026-06-09", "cantidad": -500}, {"fecha": "2026-06-12", "cantidad": -500}, {"fecha": "2026-06-18", "cantidad": -500}, {"fecha": "2026-06-22", "cantidad": -500}, {"fecha": "2026-06-27", "cantidad": -500}, {"fecha": "2026-06-28", "cantidad": -500}]}, {"codigo": "990001400005", "grupo": "Etiquetas", "descripcion": "ETIQUETA AUTUMN CRISP 3LB COSTCO", "stock_inicial": 2000, "stock_final": 1450, "total_ingresos": 2200, "total_consumos": -2750, "ingresos": [{"fecha": "2026-06-23", "proveedor": "SAFCO", "factura": "FAC F915-1021", "cantidad": 1200}, {"fecha": "2026-06-28", "proveedor": "ECOPACKING", "factura": "FAC F001-1527", "cantidad": 1000}], "consumos": [{"fecha": "2026-06-01", "cantidad": -500}, {"fecha": "2026-06-10", "cantidad": -250}, {"fecha": "2026-06-15", "cantidad": -500}, {"fecha": "2026-06-20", "cantidad": -500}, {"fecha": "2026-06-25", "cantidad": -500}, {"fecha": "2026-06-30", "cantidad": -500}]}, {"codigo": "990001400017", "grupo": "Fajillas", "descripcion": "FAJILLA 1LB COTTON CANDY TALSA", "stock_inicial": 4000, "stock_final": 3750, "total_ingresos": 2500, "total_consumos": -2750, "ingresos": [{"fecha": "2026-06-23", "proveedor": "SAFCO", "factura": "FAC F915-1021", "cantidad": 1500}, {"fecha": "2026-06-27", "proveedor": "ECOPACKING", "factura": "FAC F001-1526", "cantidad": 1000}], "consumos": [{"fecha": "2026-06-01", "cantidad": -500}, {"fecha": "2026-06-10", "cantidad": -250}, {"fecha": "2026-06-15", "cantidad": -500}, {"fecha": "2026-06-20", "cantidad": -500}, {"fecha": "2026-06-25", "cantidad": -500}, {"fecha": "2026-06-30", "cantidad": -500}]}, {"codigo": "990001400027", "grupo": "Fajillas", "descripcion": "FAJILLA 1LB CANDY HEARTS DFI", "stock_inicial": 2000, "stock_final": 400, "total_ingresos": 1900, "total_consumos": -3500, "ingresos": [{"fecha": "2026-06-24", "proveedor": "SAFCO", "factura": "FAC F915-1022", "cantidad": 1500}, {"fecha": "2026-06-28", "proveedor": "ECOPACKING", "factura": "FAC F001-1527", "cantidad": 400}], "consumos": [{"fecha": "2026-06-02", "cantidad": -250}, {"fecha": "2026-06-03", "cantidad": -250}, {"fecha": "2026-06-09", "cantidad": -500}, {"fecha": "2026-06-12", "cantidad": -500}, {"fecha": "2026-06-18", "cantidad": -500}, {"fecha": "2026-06-22", "cantidad": -500}, {"fecha": "2026-06-27", "cantidad": -500}, {"fecha": "2026-06-28", "cantidad": -500}]}, {"codigo": "990001400035", "grupo": "Etiquetas", "descripcion": "ETIQUETA AUTUMN CRISP 500 gr TALSA", "stock_inicial": 3000, "stock_final": 1900, "total_ingresos": 1900, "total_consumos": -3000, "ingresos": [{"fecha": "2026-06-23", "proveedor": "SAFCO", "factura": "FAC F915-1021", "cantidad": 1500}, {"fecha": "2026-06-27", "proveedor": "ECOPACKING", "factura": "FAC F001-1526", "cantidad": 400}], "consumos": [{"fecha": "2026-06-01", "cantidad": -250}, {"fecha": "2026-06-04", "cantidad": -250}, {"fecha": "2026-06-07", "cantidad": -500}, {"fecha": "2026-06-11", "cantidad": -500}, {"fecha": "2026-06-17", "cantidad": -250}, {"fecha": "2026-06-18", "cantidad": -250}, {"fecha": "2026-06-22", "cantidad": -500}, {"fecha": "2026-06-27", "cantidad": -500}]}, {"codigo": "990001500001", "grupo": "Fajillas", "descripcion": "FAJILLON DE CAJA 7.3 KG/DORADO", "stock_inicial": 3000, "stock_final": 2450, "total_ingresos": 2200, "total_consumos": -2750, "ingresos": [{"fecha": "2026-06-24", "proveedor": "SAFCO", "factura": "FAC F915-1022", "cantidad": 1200}, {"fecha": "2026-06-28", "proveedor": "ECOPACKING", "factura": "FAC F001-1527", "cantidad": 1000}], "consumos": [{"fecha": "2026-06-01", "cantidad": -500}, {"fecha": "2026-06-10", "cantidad": -250}, {"fecha": "2026-06-15", "cantidad": -500}, {"fecha": "2026-06-20", "cantidad": -500}, {"fecha": "2026-06-25", "cantidad": -500}, {"fecha": "2026-06-30", "cantidad": -500}]}, {"codigo": "990001500004", "grupo": "Fajillas", "descripcion": "FAJILLON DE CAJA 7.3 KG/AGRITAC", "stock_inicial": 4000, "stock_final": 3100, "total_ingresos": 2100, "total_consumos": -3000, "ingresos": [{"fecha": "2026-06-23", "proveedor": "SAFCO", "factura": "FAC F915-1021", "cantidad": 1500}, {"fecha": "2026-06-27", "proveedor": "ECOPACKING", "factura": "FAC F001-1526", "cantidad": 600}], "consumos": [{"fecha": "2026-06-01", "cantidad": -250}, {"fecha": "2026-06-04", "cantidad": -250}, {"fecha": "2026-06-07", "cantidad": -500}, {"fecha": "2026-06-11", "cantidad": -500}, {"fecha": "2026-06-17", "cantidad": -250}, {"fecha": "2026-06-18", "cantidad": -250}, {"fecha": "2026-06-22", "cantidad": -500}, {"fecha": "2026-06-27", "cantidad": -500}]}]};
+
+let filterMode = 'materiales';
+let mode = 'programa';
+let selectedPrograma = null;
+let selectedCodigo = null;
+let selectedStockCodigo = null;
+
+// ---------- FILTRO PRINCIPAL (sidebar) ----------
+function setFilter(f){
+  filterMode = f;
+  document.getElementById('filterMateriales').classList.toggle('active', f==='materiales');
+  document.getElementById('filterStock').classList.toggle('active', f==='stock');
+  document.getElementById('viewMateriales').style.display = f==='materiales' ? 'block' : 'none';
+  document.getElementById('viewStock').style.display = f==='stock' ? 'block' : 'none';
+}
+
+// ---------- MODO PROGRAMA / CODIGO (dentro de Materiales) ----------
+function setMode(m){
+  mode = m;
+  document.getElementById('tabPrograma').classList.toggle('active', m==='programa');
+  document.getElementById('tabCodigo').classList.toggle('active', m==='codigo');
+  document.getElementById('panelPrograma').style.display = m==='programa' ? 'block' : 'none';
+  document.getElementById('panelCodigo').style.display = m==='codigo' ? 'block' : 'none';
+}
+
+function buildProgramGrid(){
+  const programas = [...new Set(CATALOG_DATA.programas.map(p=>p.programa))].sort();
+  document.getElementById('progCount').textContent = programas.length + ' programas';
+  const grid = document.getElementById('programGrid');
+  grid.innerHTML = '';
+  programas.forEach(p=>{
+    const btn = document.createElement('div');
+    btn.className = 'program-pill';
+    btn.textContent = p;
+    btn.onclick = () => selectPrograma(p, btn);
+    grid.appendChild(btn);
+  });
+}
+
+function selectPrograma(p, el){
+  selectedPrograma = p;
+  document.querySelectorAll('#programGrid .program-pill').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+
+  const rows = CATALOG_DATA.programas.filter(r => r.programa === p);
+  const container = document.getElementById('programResults');
+  container.innerHTML = '';
+
+  const title = document.createElement('div');
+  title.className = 'results-title';
+  title.textContent = `Materiales del Programa ${p} — ${rows.length} ${rows.length===1?'material':'materiales'}`;
+  container.appendChild(title);
+
+  if(rows.length === 0){
+    container.innerHTML += '<div class="empty-state">No se encontraron materiales para este programa.</div>';
+    return;
+  }
+
+  rows.forEach(r=>{
+    const t = document.createElement('div');
+    t.className = 'ticket';
+    t.innerHTML = `<span class="code">${r.codigo}</span><span class="desc">${escapeHtml(r.material)}</span>`;
+    container.appendChild(t);
+  });
+}
+
+function getUniqueCodes(){
+  const map = new Map();
+  CATALOG_DATA.maestra.forEach(r=>{
+    if(!map.has(r.codigo)){
+      map.set(r.codigo, r);
+    }
+  });
+  return [...map.values()].sort((a,b)=> a.codigo.localeCompare(b.codigo));
+}
+
+function buildCodeList(filter=''){
+  const codes = getUniqueCodes();
+  const f = filter.trim().toLowerCase();
+  const filtered = f
+    ? codes.filter(c => c.codigo.toLowerCase().includes(f) || c.nombre_planeamiento.toLowerCase().includes(f) || (c.grupo||'').toLowerCase().includes(f))
+    : codes;
+
+  document.getElementById('codeCount').textContent = codes.length + ' códigos';
+  const list = document.getElementById('codeList');
+  list.innerHTML = '';
+
+  if(filtered.length === 0){
+    list.innerHTML = '<div class="empty-state">Sin coincidencias.</div>';
+    return;
+  }
+
+  filtered.forEach(c=>{
+    const row = document.createElement('div');
+    row.className = 'code-row';
+    if(selectedCodigo === c.codigo) row.classList.add('selected');
+    row.innerHTML = `<span class="tag">${c.codigo}</span><span class="name">${escapeHtml(c.nombre_planeamiento)}</span>`;
+    row.onclick = () => selectCodigo(c.codigo);
+    list.appendChild(row);
+  });
+}
+
+function selectCodigo(codigo){
+  selectedCodigo = codigo;
+  buildCodeList(document.getElementById('codeSearch').value);
+
+  const rows = CATALOG_DATA.programas.filter(r => r.codigo === codigo);
+  const maestraRow = CATALOG_DATA.maestra.find(r => r.codigo === codigo);
+  const container = document.getElementById('codeResults');
+  container.innerHTML = '';
+
+  const title = document.createElement('div');
+  title.className = 'results-title';
+  title.textContent = `Código ${codigo} — usado en ${rows.length} ${rows.length===1?'programa':'programas'}`;
+  container.appendChild(title);
+
+  if(maestraRow){
+    const info = document.createElement('div');
+    info.style.cssText = 'font-size:12px;color:var(--ink-soft);margin-bottom:10px;padding:0 2px;';
+    info.textContent = `${maestraRow.nombre_planeamiento} · Grupo: ${maestraRow.grupo}`;
+    container.appendChild(info);
+  }
+
+  if(rows.length === 0){
+    container.innerHTML += '<div class="empty-state">Este código no aparece en ningún programa.</div>';
+    return;
+  }
+
+  const seen = new Set();
+  rows.forEach(r=>{
+    const key = r.programa;
+    if(seen.has(key)) return;
+    seen.add(key);
+    const t = document.createElement('div');
+    t.className = 'ticket';
+    t.innerHTML = `<span class="program-badge">${r.programa}</span><span class="desc">${escapeHtml(r.material)}</span>`;
+    container.appendChild(t);
+  });
+}
+
+// ---------- STOCK ----------
+function buildStockCodeList(filter=''){
+  const codes = [...CATALOG_DATA.stock].sort((a,b)=> a.codigo.localeCompare(b.codigo));
+  const f = filter.trim().toLowerCase();
+  const filtered = f
+    ? codes.filter(c => c.codigo.toLowerCase().includes(f) || (c.descripcion||'').toLowerCase().includes(f) || (c.grupo||'').toLowerCase().includes(f))
+    : codes;
+
+  document.getElementById('stockCodeCount').textContent = codes.length + ' códigos con stock';
+  const list = document.getElementById('stockCodeList');
+  list.innerHTML = '';
+
+  if(filtered.length === 0){
+    list.innerHTML = '<div class="empty-state">Sin coincidencias.</div>';
+    return;
+  }
+
+  filtered.forEach(c=>{
+    const row = document.createElement('div');
+    row.className = 'code-row';
+    if(selectedStockCodigo === c.codigo) row.classList.add('selected');
+    row.innerHTML = `<span class="tag">${c.codigo}</span><span class="name">${escapeHtml(c.descripcion)}</span><span class="grupo-mini">${escapeHtml(c.grupo||'')}</span>`;
+    row.onclick = () => selectStockCodigo(c.codigo);
+    list.appendChild(row);
+  });
+}
+
+function selectStockCodigo(codigo){
+  selectedStockCodigo = codigo;
+  buildStockCodeList(document.getElementById('stockSearch').value);
+
+  const item = CATALOG_DATA.stock.find(s => s.codigo === codigo);
+  const container = document.getElementById('stockResults');
+  container.innerHTML = '';
+
+  if(!item){
+    container.innerHTML = '<div class="empty-state">No hay datos de stock para este código.</div>';
+    return;
+  }
+
+  const title = document.createElement('div');
+  title.className = 'results-title';
+  title.textContent = `Stock — ${item.codigo}`;
+  container.appendChild(title);
+
+  const info = document.createElement('div');
+  info.style.cssText = 'font-size:12px;color:var(--ink-soft);margin-bottom:14px;padding:0 2px;';
+  info.textContent = `${item.descripcion} · Grupo: ${item.grupo || '—'}`;
+  container.appendChild(info);
+
+  const totalEntradas = item.total_ingresos || 0;
+  const totalSalidas = Math.abs(item.total_consumos || 0);
+
+  const summary = document.createElement('div');
+  summary.className = 'stock-summary';
+  summary.innerHTML = `
+    <div class="stock-card">
+      <div class="label">Stock Inicial</div>
+      <div class="value">${formatNum(item.stock_inicial)}</div>
+    </div>
+    <div class="stock-card entradas">
+      <div class="label">Ingresos</div>
+      <div class="value">+${formatNum(totalEntradas)}</div>
+    </div>
+    <div class="stock-card salidas">
+      <div class="label">Consumos</div>
+      <div class="value">-${formatNum(totalSalidas)}</div>
+    </div>
+    <div class="stock-card final">
+      <div class="label">Stock Final</div>
+      <div class="value">${formatNum(item.stock_final)}</div>
+    </div>
+  `;
+  container.appendChild(summary);
+
+  const cols = document.createElement('div');
+  cols.className = 'ledger-cols';
+
+  // Ingresos
+  const ingresosBlock = document.createElement('div');
+  ingresosBlock.innerHTML = `<div class="ledger-block-title">Detalle de Ingresos (${item.ingresos.length})</div>`;
+  if(item.ingresos.length === 0){
+    ingresosBlock.innerHTML += '<div class="empty-state">Sin ingresos registrados.</div>';
+  } else {
+    item.ingresos.forEach(mv=>{
+      const r = document.createElement('div');
+      r.className = 'ledger-row entrada';
+      r.innerHTML = `<span class="fecha">${mv.fecha}</span><span class="meta">${escapeHtml(mv.proveedor||'')} · ${escapeHtml(mv.factura||'')}</span><span class="cant">+${formatNum(mv.cantidad)}</span>`;
+      ingresosBlock.appendChild(r);
+    });
+  }
+  cols.appendChild(ingresosBlock);
+
+  // Consumos
+  const consumosBlock = document.createElement('div');
+  consumosBlock.innerHTML = `<div class="ledger-block-title">Detalle de Consumos (${item.consumos.length})</div>`;
+  if(item.consumos.length === 0){
+    consumosBlock.innerHTML += '<div class="empty-state">Sin consumos registrados.</div>';
+  } else {
+    item.consumos.forEach(mv=>{
+      const r = document.createElement('div');
+      r.className = 'ledger-row salida';
+      r.innerHTML = `<span class="fecha">${mv.fecha}</span><span class="meta"></span><span class="cant">${formatNum(mv.cantidad)}</span>`;
+      consumosBlock.appendChild(r);
+    });
+  }
+  cols.appendChild(consumosBlock);
+
+  container.appendChild(cols);
+}
+
+function formatNum(n){
+  if(n === null || n === undefined) return '—';
+  return Number(n).toLocaleString('es-PE');
+}
+
+function escapeHtml(str){
+  const d = document.createElement('div');
+  d.textContent = str == null ? '' : String(str);
+  return d.innerHTML;
+}
+
+document.getElementById('codeSearch').addEventListener('input', (e)=>{
+  buildCodeList(e.target.value);
+});
+document.getElementById('stockSearch').addEventListener('input', (e)=>{
+  buildStockCodeList(e.target.value);
+});
+
+// init
+buildProgramGrid();
+buildCodeList();
+buildStockCodeList();
+</script>
+</body>
+</html>
